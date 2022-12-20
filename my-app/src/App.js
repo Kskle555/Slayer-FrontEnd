@@ -16,7 +16,7 @@ import Search from './Components/Search/Search';
 import Searchapi from './Components/Search/Searchapi';
 import Navbar2 from './Components/AdminPanel/SideNavbar/Navbar2';
 import Selector from './Components/AdminPanel/DeleteAnime/Selector';
-
+import ApiTest from './Components/ApiTest/ApiTest'
 function App() {
   return (
     <Routes> 
@@ -33,7 +33,7 @@ function App() {
    <Route path="/Panel" element={<><Navbar2/></>}/>
    <Route path="/AddAnime" element={<><Navbar2/><AddAnime/></> }/>
    <Route path="/DeleteAnime" element={<><Navbar2/><Selector/></> }/>
-
+   <Route path="/ApiTest" element={<><Navbar/><ApiTest/><Footerr/></> }/>
  </Routes>
   );
 }

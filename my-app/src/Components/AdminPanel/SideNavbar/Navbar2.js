@@ -41,7 +41,7 @@ export default function Navbar2() {
               <Link to="#" className="menu-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
-            </li>
+            </li> 
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>

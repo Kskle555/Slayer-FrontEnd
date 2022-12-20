@@ -9,7 +9,7 @@ export default function Searchapi() {
         const loadPosts = async () => {
           setLoading(true);
           const response = await axios.get(
-            "https://localhost:7127/api/Default");
+            "https://localhost:7249/api/Home");
           setPosts(response.data);
           setLoading(false);
         };

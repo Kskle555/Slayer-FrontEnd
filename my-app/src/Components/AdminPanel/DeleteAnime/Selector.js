@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import swal from 'sweetalert';
+import axios from "axios";
 const Selector = () => {
   const [animes, setAnimes] = useState(null);
   const [inputValue, setInputValue] = useState("");
@@ -9,7 +10,7 @@ const Selector = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://localhost:7127/api/Default")
+    fetch("https://localhost:7249/api/Home")
       .then((res) => res.json())
       .then((data) => {
         setAnimes(data);
@@ -18,11 +19,21 @@ const Selector = () => {
     const alert =()=>{
       swal({
         title: "Tebrikler!",
-        text: "Anime Başarıyla Silindi!",
+        text: "Anime Başariyla Silindi!",
         icon: "success",
         button: "Kapat!",
       });
     }
+    const handleClick = async () => {
+      const response = await axios
+        .delete("https://localhost:7249/api/Home/"+inputValue)
+        .catch((error) => console.log("Error: ", error));
+      if (response && response.data) {
+        console.log(response);
+        console.log(response.data);
+      }
+    };
+
   return (
     <div className="flex mt-2 justify-center">
     <div className="w-72 origin-center  font-medium h-80">
@@ -50,7 +61,7 @@ const Selector = () => {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value.toLowerCase())}
-            placeholder="Enter Anime name"
+            placeholder="Enter Anime id here"
             className="placeholder:text-gray-700 p-2 outline-none"
           />
         </div>
@@ -61,6 +72,7 @@ const Selector = () => {
             ${
               anime?.name?.toLowerCase() === selected?.toLowerCase() &&
               "bg-sky-600 text-white"
+              
             }
             ${
               anime?.name?.toLowerCase().startsWith(inputValue)
@@ -80,7 +92,7 @@ const Selector = () => {
         ))}
       </ul>
       <p>{selected} Gerçekten silmek istiyor musunuz ?</p>
-      <button onClick={alert} className="bg-red-700 ml-24 text-white font-semibold rounded-full w-24">Anime Sil</button>
+      <button onClick={handleClick} className="bg-red-700 ml-24 text-white font-semibold rounded-full w-24">Anime Sil</button>
     </div>
   
     </div>
